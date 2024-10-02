@@ -16,8 +16,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/profile', [ProfileController::class, 'index'] );
+
 Route::get('/', [DashboardController::class, 'index'] ) ->name ('dashboard');
 
 Route::post('/idea', [IdeaController::class, 'store'] ) -> name('idea.create');
 
-Route::get('/profile', [ProfileController::class, 'index'] );
+Route::get('/idea/{idea}', [IdeaController::class, 'show'] ) -> name('idea.show');
+
+Route::get('/idea/{idea}/edit', [IdeaController::class, 'edit'] ) -> name('idea.edit');
+
+Route::put('/idea/{idea}', [IdeaController::class, 'update'] ) -> name('idea.update');
+
+Route::get('/ideas/{idea}', [IdeaController::class, 'show'])->name('ideas.show');
+
+Route::delete('/idea/{id}', [IdeaController::class, 'destroy'] ) -> name('idea.destroy');
+
+
+
