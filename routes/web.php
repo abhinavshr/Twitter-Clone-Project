@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\IdeaController;
+use App\Http\Controllers\IdeaLikeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -46,8 +48,16 @@ Route::post('/login', [LoginController::class, 'authentication'] );
 
 Route::post('/logout', [LoginController::class, 'logout'] )->name('logout');
 
-Route::resource('users', ProfileController::class)->only('show', 'edit', 'update')->middleware('auth');
+Route::resource('users', ProfileController::class)->only('show');
+
+Route::resource('users', ProfileController::class)->only('edit', 'update')->middleware('auth');
 
 Route::get('profile', [ProfileController::class, 'profile'])->middleware('auth')->name('profile');
 
+Route::post('users/{user}/follow', [FollowerController::class, 'follow'])->middleware('auth')->name('user.follow');
 
+Route::post('users/{user}/unfollow', [FollowerController::class,'unfollow'] )->middleware('auth')->name('user.unfollow');
+
+Route::post('ideas/{idea}/like', [IdeaLikeController::class, 'like'])->middleware('auth')->name('idea.like');
+
+Route::post('ideas/{idea}/unlike', [IdeaLikeController::class,'unlike'] )->middleware('auth')->name('idea.unlike');

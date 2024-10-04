@@ -13,7 +13,7 @@
             <hr>
             @forelse ($ideas as $Idea)
                 <div class="mt-3">
-                    @include('shared.idea_card')
+                    @include('ideas.idea_card')
                 </div>
             @empty
                 <p class="text-center mt-4">No Results Found.</p>
